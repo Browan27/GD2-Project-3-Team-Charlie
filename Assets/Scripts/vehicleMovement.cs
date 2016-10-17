@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 
 public class vehicleMovement : MonoBehaviour {
@@ -13,10 +14,16 @@ public class vehicleMovement : MonoBehaviour {
     private float rotationSpeed;
     private float translation;
 
-    private bool test = false;
+
+    private bool hasItem = false;
+    //public Texture item = "question";
+    public Texture noItem;
+    private Texture display;
 
     // Use this for initialization
     void Start () {
+        display = noItem;
+
         translation = 0;
         speed = 0.0f;
         switch (vehicleClass) {
@@ -48,6 +55,8 @@ public class vehicleMovement : MonoBehaviour {
 	
     // Update is called once per frame
     void Update () {
+
+
         if (Input.GetButton ("Accelerate" + playerNumber) && speed <= maxSpeed) {
             speed += acceleration * Time.deltaTime;
         } else if (speed > 0 && !Input.GetButton ("Accelerate" + playerNumber)) {
@@ -64,6 +73,11 @@ public class vehicleMovement : MonoBehaviour {
             speed = 0;
         }
 
+        if (Input.GetButton ("Item" + playerNumber)) {
+            hasItem = false;
+            display = noItem;
+        }
+
         translation = speed;
         float xRotation = Input.GetAxis ("Right Vertical") * rotationSpeed;
         float yRotation = Input.GetAxis("Left Horizontal") * rotationSpeed;
@@ -73,20 +87,31 @@ public class vehicleMovement : MonoBehaviour {
         yRotation *= Time.deltaTime;
         zRotation *= Time.deltaTime;
 
-        transform.Translate(0, 0, translation);
+        //transform.Translate(0, 0, translation);
+        gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, 0, translation, ForceMode.Force);
         transform.Rotate(xRotation, yRotation, zRotation);
     }
 
     void OnCollisionEnter(Collision col){
         if(col.collider.CompareTag("Ramp")){
-            test = true;
             transform.rotation = Quaternion.Slerp (transform.rotation, col.transform.rotation, 0);
         }
     }
 
-
+    void OnTriggerEnter(Collider other) 
+    {
+        if (other.gameObject.CompareTag ("Pick Up") && hasItem == false)
+        {
+            int pick = Random.Range (0, 7);
+            display = other.gameObject.GetComponent<ItemBoxRotator> ().pickups [pick];
+            //display = Resources.Load("Textures/" + item + ".png", typeof(Texture)) as Texture;
+            other.gameObject.SetActive (false);
+            hasItem = true;
+        }
+    }
 
     void OnGUI(){
-        GUI.Label(new Rect(10, 10, 100, 100), test.ToString());
+        GUI.Label(new Rect(10, 10, 100, 100), hasItem.ToString());
+        GUI.DrawTexture(new Rect(10, 50, 128, 80), display);
     }
 }
