@@ -108,10 +108,34 @@ public class vehicleMovement : MonoBehaviour {
             other.gameObject.SetActive (false);
             hasItem = true;
         }
+
+        if (other.gameObject.CompareTag ("Boost")) {
+            speed *= 2;
+        }
+
+        if (other.gameObject.CompareTag ("Slow Pad")) {
+            speed /= 2;
+        }
+
+        if (other.gameObject.CompareTag ("Grav")) {
+            gameObject.GetComponent<Rigidbody> ().useGravity = !gameObject.GetComponent<Rigidbody> ().useGravity;
+        }
+
+    }
+
+    void OnTriggerExit(Collider other){
+        if (other.gameObject.CompareTag ("Boost")) {
+            speed /= 2;
+        }
+
+        if (other.gameObject.CompareTag ("Slow Pad")) {
+            speed *= 2;
+        }
     }
 
     void OnGUI(){
-        GUI.Label(new Rect(10, 10, 100, 100), hasItem.ToString());
-        GUI.DrawTexture(new Rect(10, 50, 128, 80), display);
+        GUI.Label(new Rect(50, 50, 200, 200), speed.ToString());
+        //GUI.DrawTexture(new Rect(0, 0, 128, 80), display);
     }
+
 }
