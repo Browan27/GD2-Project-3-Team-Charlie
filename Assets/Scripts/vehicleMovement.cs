@@ -14,11 +14,15 @@ public class vehicleMovement : MonoBehaviour {
     private float rotationSpeed;
     private float translation;
 
+    private int hp;
 
+
+    private bool onGround;
     private bool hasItem = false;
-    //public Texture item = "question";
     public Texture noItem;
     private Texture display;
+
+    public Rigidbody BombPrefab;
 
     // Use this for initialization
     void Start () {
@@ -32,23 +36,28 @@ public class vehicleMovement : MonoBehaviour {
             maxSpeed = 6.0f;
             acceleration = 20.0f;
             rotationSpeed = 120f;
+            hp = 2;
             break;
         case 1:
             //Car
-            maxSpeed = 1.0f;
-            acceleration = 0.1f;
+            maxSpeed = 2f;
+            acceleration = 0.5f;
             rotationSpeed = 110f;
+            hp = 3;
             break;
         case 2:
             //Truck
             maxSpeed = 4.0f;
             acceleration = 20.0f;
             rotationSpeed = 100f;
+            hp = 4;
             break;
         default:
             //Assume Car
-            maxSpeed = 5.0f;
+            maxSpeed = 1.5f;
+            acceleration = 0.25f;
             rotationSpeed = 110f;
+            hp = 3;
             break;
         }
     }
@@ -56,45 +65,57 @@ public class vehicleMovement : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
+        if (onGround) {
+            if (Input.GetButton ("Accelerate" + playerNumber) && speed <= maxSpeed) {
+                speed += acceleration * Time.deltaTime;
+            } else if (speed > 0 && !Input.GetButton ("Accelerate" + playerNumber)) {
+                speed -= acceleration * Time.deltaTime;
+            } 
 
-        if (Input.GetButton ("Accelerate" + playerNumber) && speed <= maxSpeed) {
-            speed += acceleration * Time.deltaTime;
-        } else if (speed > 0 && !Input.GetButton ("Accelerate" + playerNumber)) {
-            speed -= acceleration * Time.deltaTime;
-        } 
-
-        if (Input.GetButton ("Reverse" + playerNumber) && speed >= -maxSpeed) {
-            speed -= acceleration * Time.deltaTime;
-        } else if (speed < 0 && !Input.GetButton ("Reverse" + playerNumber)) {
-            speed += acceleration * Time.deltaTime;
+            if (Input.GetButton ("Reverse" + playerNumber) && speed >= -maxSpeed) {
+                speed -= acceleration * Time.deltaTime;
+            } else if (speed < 0 && !Input.GetButton ("Reverse" + playerNumber)) {
+                speed += acceleration * Time.deltaTime;
+            }
         }
 
         if (!Input.GetButton ("Accelerate" + playerNumber) && !Input.GetButton ("Reverse" + playerNumber) && (speed > -0.01 && speed < 0.01)) {
             speed = 0;
         }
 
-        if (Input.GetButton ("Item" + playerNumber)) {
+        if (Input.GetButton ("Item" + playerNumber) && hasItem == true) {
+            SpawnItem();
             hasItem = false;
             display = noItem;
         }
 
         translation = speed;
-        float xRotation = Input.GetAxis ("Right Vertical") * rotationSpeed;
+        float xRotation = Input.GetAxis ("Right Vertical") * rotationSpeed * 1.5f;
         float yRotation = Input.GetAxis("Left Horizontal") * rotationSpeed;
-        float zRotation = Input.GetAxis("Right Horizontal") * rotationSpeed;
+        float zRotation = Input.GetAxis("Right Horizontal") * rotationSpeed * 1.5f;
 
         xRotation *= Time.deltaTime;
         yRotation *= Time.deltaTime;
         zRotation *= Time.deltaTime;
 
         //transform.Translate(0, 0, translation);
-        gameObject.GetComponent<Rigidbody>().AddRelativeForce(0, 0, translation, ForceMode.Force);
+        gameObject.GetComponent<Rigidbody>().AddRelativeForce((translation / 3 * yRotation), 0, translation, ForceMode.Force);
         transform.Rotate(xRotation, yRotation, zRotation);
     }
 
     void OnCollisionEnter(Collision col){
         if(col.collider.CompareTag("Ramp")){
             transform.rotation = Quaternion.Slerp (transform.rotation, col.transform.rotation, 0);
+            onGround = true;
+        }
+        if (col.collider.CompareTag ("Ground")) {
+            onGround = true;
+        }
+    }
+
+    void OnCollisionExit(Collision col){
+        if (col.collider.CompareTag ("Ramp") || col.collider.CompareTag ("Ground")) {
+            onGround = false;
         }
     }
 
@@ -118,7 +139,7 @@ public class vehicleMovement : MonoBehaviour {
         }
 
         if (other.gameObject.CompareTag ("Grav")) {
-            gameObject.GetComponent<Rigidbody> ().useGravity = !gameObject.GetComponent<Rigidbody> ().useGravity;
+            gameObject.GetComponent<Rigidbody> ().AddForce (new Vector3 (0, 30, 0));
         }
 
     }
@@ -134,8 +155,13 @@ public class vehicleMovement : MonoBehaviour {
     }
 
     void OnGUI(){
-        GUI.Label(new Rect(50, 50, 200, 200), speed.ToString());
-        //GUI.DrawTexture(new Rect(0, 0, 128, 80), display);
+        //GUI.Label(new Rect(50, 50, 200, 200), speed.ToString());
+        //GUI.Label (new Rect (50, 100, 200, 200), onGround.ToString ());
+        GUI.DrawTexture(new Rect(0, 0, 128, 80), display);
+    }
+
+    void SpawnItem(){
+        Instantiate (BombPrefab, gameObject.transform);
     }
 
 }
