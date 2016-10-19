@@ -98,7 +98,6 @@ public class vehicleMovement : MonoBehaviour {
         yRotation *= Time.deltaTime;
         zRotation *= Time.deltaTime;
 
-        //transform.Translate(0, 0, translation);
         gameObject.GetComponent<Rigidbody>().AddRelativeForce((translation / 3 * yRotation), 0, translation, ForceMode.Force);
         transform.Rotate(xRotation, yRotation, zRotation);
     }
@@ -125,7 +124,6 @@ public class vehicleMovement : MonoBehaviour {
         {
             int pick = Random.Range (0, 7);
             display = other.gameObject.GetComponent<ItemBoxRotator> ().pickups [pick];
-            //display = Resources.Load("Textures/" + item + ".png", typeof(Texture)) as Texture;
             other.gameObject.SetActive (false);
             hasItem = true;
         }
@@ -161,7 +159,7 @@ public class vehicleMovement : MonoBehaviour {
     }
 
     void SpawnItem(){
-        Instantiate (BombPrefab, gameObject.transform);
+        Instantiate (BombPrefab);
     }
 
 }
