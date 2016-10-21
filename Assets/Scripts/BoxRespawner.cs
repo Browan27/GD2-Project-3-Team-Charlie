@@ -8,7 +8,7 @@ public class BoxRespawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        InvokeRepeating ("RespawnBox", 1, 1);
+        InvokeRepeating ("RespawnBox", 1, 10);
 	}
 
     void Update(){

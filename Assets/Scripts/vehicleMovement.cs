@@ -22,7 +22,7 @@ public class vehicleMovement : MonoBehaviour {
     public Texture noItem;
     private Texture display;
 
-    public Rigidbody BombPrefab;
+    public GameObject BombPrefab;
 
     // Use this for initialization
     void Start () {
@@ -90,9 +90,9 @@ public class vehicleMovement : MonoBehaviour {
         }
 
         translation = speed;
-        float xRotation = Input.GetAxis ("Right Vertical") * rotationSpeed * 1.5f;
-        float yRotation = Input.GetAxis("Left Horizontal") * rotationSpeed;
-        float zRotation = Input.GetAxis("Right Horizontal") * rotationSpeed * 1.5f;
+        float xRotation = Input.GetAxis ("Right Vertical" + playerNumber) * rotationSpeed * 1.5f;
+        float yRotation = Input.GetAxis("Left Horizontal" + playerNumber) * rotationSpeed;
+        float zRotation = Input.GetAxis("Right Horizontal" + playerNumber) * rotationSpeed * 1.5f;
 
         xRotation *= Time.deltaTime;
         yRotation *= Time.deltaTime;
@@ -137,7 +137,7 @@ public class vehicleMovement : MonoBehaviour {
         }
 
         if (other.gameObject.CompareTag ("Grav")) {
-            gameObject.GetComponent<Rigidbody> ().AddForce (new Vector3 (0, 30, 0));
+            gameObject.GetComponent<Rigidbody> ().AddForce (new Vector3 (0, 100, 0), ForceMode.Impulse);
         }
 
     }
@@ -155,11 +155,22 @@ public class vehicleMovement : MonoBehaviour {
     void OnGUI(){
         //GUI.Label(new Rect(50, 50, 200, 200), speed.ToString());
         //GUI.Label (new Rect (50, 100, 200, 200), onGround.ToString ());
-        GUI.DrawTexture(new Rect(0, 0, 128, 80), display);
+        switch (playerNumber) {
+        case 1:
+            GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
+            break;
+        case 2:
+            GUI.DrawTexture (new Rect (Screen.width / 2, 0, 128, 80), display);
+            break;
+        default:
+            GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
+            break;
+        }
     }
 
     void SpawnItem(){
-        Instantiate (BombPrefab);
+        GameObject b = Instantiate (BombPrefab);
+        b.GetComponent<Bomb> ().Initialize (playerNumber);
     }
 
 }

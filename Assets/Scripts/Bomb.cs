@@ -4,13 +4,19 @@ using System.Collections;
 public class Bomb : MonoBehaviour {
 
     GameObject player;
+    int playerNumber;
+    int bounces;
+
+    public void Initialize(int p){
+        playerNumber = p;
+    }
 
 	// Use this for initialization
 	void Start () {
         //Vector3 foward = new Vector3 (0, 0, 5);
         //foward = gameObject.transform.InverseTransformPoint(foward);
 
-        player = GameObject.FindGameObjectWithTag ("Player");
+        player = GameObject.FindGameObjectWithTag ("Player" + playerNumber);
         //float playerRotation = player.gameObject.transform.rotation.y;
         //Quaternion bombRotation = new Quaternion (0, playerRotation, 0, 0);
 
@@ -20,6 +26,13 @@ public class Bomb : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	}
+
+
+    void OnCollisionEnter(Collision col){
+        if (col.collider.CompareTag ("Player" + playerNumber)) {
+        }
+        else{
+            GameObject.Destroy(this.gameObject);
+        }
+    }
 }
