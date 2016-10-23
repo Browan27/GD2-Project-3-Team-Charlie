@@ -20,7 +20,7 @@ public class Bomb : MonoBehaviour {
         //float playerRotation = player.gameObject.transform.rotation.y;
         //Quaternion bombRotation = new Quaternion (0, playerRotation, 0, 0);
 
-        transform.position = player.transform.position + (player.transform.forward * 2);
+        transform.position = player.transform.position + (player.transform.forward * 3);
         transform.rotation = player.transform.rotation;
         gameObject.GetComponent<Rigidbody> ().AddRelativeForce (new Vector3 (0, 0, 50), ForceMode.Impulse);
 	}
@@ -29,7 +29,7 @@ public class Bomb : MonoBehaviour {
 
 
     void OnCollisionEnter(Collision col){
-        if (col.collider.CompareTag ("Player" + playerNumber)) {
+        if (col.collider.CompareTag ("Ground") || col.collider.CompareTag("Player" + playerNumber)) {
         }
         else{
             GameObject.Destroy(this.gameObject);

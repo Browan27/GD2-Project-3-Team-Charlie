@@ -40,8 +40,8 @@ public class vehicleMovement : MonoBehaviour {
             break;
         case 1:
             //Car
-            maxSpeed = 2f;
-            acceleration = 0.5f;
+            maxSpeed = 1.5f;
+            acceleration = 1.5f;
             rotationSpeed = 110f;
             hp = 3;
             break;
@@ -64,6 +64,10 @@ public class vehicleMovement : MonoBehaviour {
 	
     // Update is called once per frame
     void Update () {
+
+        if (hp == 0) {
+            gameObject.SetActive (false);
+        }
 
         if (onGround) {
             if (Input.GetButton ("Accelerate" + playerNumber) && speed <= maxSpeed) {
@@ -109,6 +113,9 @@ public class vehicleMovement : MonoBehaviour {
         }
         if (col.collider.CompareTag ("Ground")) {
             onGround = true;
+        }
+        if (col.collider.CompareTag ("Hazard")) {
+            hp -= 1;
         }
     }
 
@@ -169,8 +176,16 @@ public class vehicleMovement : MonoBehaviour {
     }
 
     void SpawnItem(){
-        GameObject b = Instantiate (BombPrefab);
-        b.GetComponent<Bomb> ().Initialize (playerNumber);
-    }
+        //string itemName = display.ToString ();
 
+        switch (display.name) {
+        case "bomb":
+            GameObject b = Instantiate (BombPrefab);
+            b.GetComponent<Bomb> ().Initialize (playerNumber);
+            break;
+        default:
+            break;
+        
+        }
+    }
 }
