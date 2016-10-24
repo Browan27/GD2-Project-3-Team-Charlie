@@ -8,17 +8,19 @@ public class vehicleMovement : MonoBehaviour {
     public int vehicleClass;
     public int playerNumber;
 
+    private int hp;
+
     private float maxSpeed;
     private float speed;
     private float acceleration;
     private float rotationSpeed;
     private float translation;
-
-    private int hp;
-
+    private float boostTimer;
 
     private bool onGround;
-    private bool hasItem = false;
+    private bool hasItem;
+    private bool boost;
+
     public Texture noItem;
     private Texture display;
 
@@ -27,6 +29,9 @@ public class vehicleMovement : MonoBehaviour {
     // Use this for initialization
     void Start () {
         display = noItem;
+        hasItem = false;
+        boost = false;
+        boostTimer = 0f;
 
         translation = 0;
         speed = 0.0f;
@@ -64,16 +69,32 @@ public class vehicleMovement : MonoBehaviour {
 	
     // Update is called once per frame
     void Update () {
+        
+        if(boost == true)
+        {
+            speed = maxSpeed * 2;
+        }
+        if (boostTimer > 0){
+            boostTimer -= 1 * Time.deltaTime;
+        }
+        if(boostTimer < 0 && boost == true) {
+            boost = false;
+        }
 
         if (hp == 0) {
             gameObject.SetActive (false);
         }
 
-        if (onGround) {
+        //if (onGround) {
+            if (speed > maxSpeed)
+            {
+                speed -= acceleration * Time.deltaTime * 1.25f;
+            }
+
             if (Input.GetButton ("Accelerate" + playerNumber) && speed <= maxSpeed) {
                 speed += acceleration * Time.deltaTime * 3;
             } else if (speed > 0 && !Input.GetButton ("Accelerate" + playerNumber)) {
-                speed -= acceleration * Time.deltaTime;
+                speed -= acceleration * Time.deltaTime * 1.25f;
             }
 
             if (Input.GetButton("Reverse" + playerNumber) && speed >= 0) {
@@ -83,7 +104,7 @@ public class vehicleMovement : MonoBehaviour {
             } else if (speed < 0 && !Input.GetButton ("Reverse" + playerNumber)) {
                 speed += acceleration * Time.deltaTime;
             }
-        }
+        //}
 
         if (!Input.GetButton ("Accelerate" + playerNumber) && !Input.GetButton ("Reverse" + playerNumber) && (speed > -0.01 && speed < 0.01)) {
             speed = 0;
@@ -138,7 +159,7 @@ public class vehicleMovement : MonoBehaviour {
         }
 
         if (other.gameObject.CompareTag ("Boost")) {
-            speed *= 2;
+            speed = maxSpeed * 3;
         }
 
         if (other.gameObject.CompareTag ("Slow Pad")) {
@@ -152,38 +173,45 @@ public class vehicleMovement : MonoBehaviour {
     }
 
     void OnTriggerExit(Collider other){
-        if (other.gameObject.CompareTag ("Boost")) {
-            speed /= 2;
-        }
-
         if (other.gameObject.CompareTag ("Slow Pad")) {
             speed *= 2;
         }
     }
 
     void OnGUI(){
-        //GUI.Label(new Rect(50, 50, 200, 200), speed.ToString());
         //GUI.Label (new Rect (50, 100, 200, 200), onGround.ToString ());
         switch (playerNumber) {
         case 1:
             GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
+            GUI.Label(new Rect(0, 100, 200, 200), speed.ToString());
+            //GUI.Label(new Rect(0, 110, 200, 200), boost.ToString());
+            //GUI.Label(new Rect(0, 120, 200, 200), boostTimer.ToString());
             break;
         case 2:
             GUI.DrawTexture (new Rect (Screen.width / 2, 0, 128, 80), display);
+            GUI.Label(new Rect(Screen.width / 2, 100, 200, 200), speed.ToString());
+           // GUI.Label(new Rect(Screen.width / 2, 110, 200, 200), boost.ToString());
+            //GUI.Label(new Rect(Screen.width / 2, 120, 200, 200), boostTimer.ToString());
             break;
         default:
             GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
+            GUI.Label(new Rect(0, 100, 200, 200), speed.ToString());
+           // GUI.Label(new Rect(0, 110, 200, 200), boost.ToString());
+           // GUI.Label(new Rect(0, 120, 200, 200), boostTimer.ToString());
             break;
         }
     }
 
     void SpawnItem(){
-        //string itemName = display.ToString ();
-
         switch (display.name) {
         case "bomb":
             GameObject b = Instantiate (BombPrefab);
             b.GetComponent<Bomb> ().Initialize (playerNumber);
+            break;
+        case "nitro":
+            speed = maxSpeed * 2;
+            boost = true;
+            boostTimer = 3f;
             break;
         default:
             break;
