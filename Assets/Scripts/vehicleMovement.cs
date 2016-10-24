@@ -71,13 +71,15 @@ public class vehicleMovement : MonoBehaviour {
 
         if (onGround) {
             if (Input.GetButton ("Accelerate" + playerNumber) && speed <= maxSpeed) {
-                speed += acceleration * Time.deltaTime;
+                speed += acceleration * Time.deltaTime * 3;
             } else if (speed > 0 && !Input.GetButton ("Accelerate" + playerNumber)) {
                 speed -= acceleration * Time.deltaTime;
-            } 
+            }
 
-            if (Input.GetButton ("Reverse" + playerNumber) && speed >= -maxSpeed) {
-                speed -= acceleration * Time.deltaTime;
+            if (Input.GetButton("Reverse" + playerNumber) && speed >= 0) {
+                speed -= acceleration * Time.deltaTime * 4;
+            } else if (Input.GetButton ("Reverse" + playerNumber) && speed >= -(maxSpeed)) {
+                speed -= acceleration * Time.deltaTime * 2;
             } else if (speed < 0 && !Input.GetButton ("Reverse" + playerNumber)) {
                 speed += acceleration * Time.deltaTime;
             }
@@ -102,7 +104,7 @@ public class vehicleMovement : MonoBehaviour {
         yRotation *= Time.deltaTime;
         zRotation *= Time.deltaTime;
 
-        gameObject.GetComponent<Rigidbody>().AddRelativeForce((translation / 3 * yRotation), 0, translation, ForceMode.Force);
+        gameObject.GetComponent<Rigidbody>().AddRelativeForce((translation / 2 * yRotation), 0, translation, ForceMode.Force);
         transform.Rotate(xRotation, yRotation, zRotation);
     }
 
