@@ -179,19 +179,19 @@ public class vehicleMovement : MonoBehaviour {
         }
 
         if (other.gameObject.CompareTag ("Oil")) {
-            speed /= 2;
+            speed = -speed * 2;
         }
             
     }
 
-    void OnTriggerExit(Collider other){
+    /*void OnTriggerExit(Collider other){
         if (other.gameObject.CompareTag ("Slow Pad")) {
             speed *= 2;
         }
         if (other.gameObject.CompareTag ("Oil")) {
             speed *= 2;
         }
-    }
+    }*/
 
     void OnGUI(){
         //GUI.Label (new Rect (50, 100, 200, 200), onGround.ToString ());
