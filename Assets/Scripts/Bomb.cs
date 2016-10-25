@@ -13,12 +13,7 @@ public class Bomb : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //Vector3 foward = new Vector3 (0, 0, 5);
-        //foward = gameObject.transform.InverseTransformPoint(foward);
-
         player = GameObject.FindGameObjectWithTag ("Player" + playerNumber);
-        //float playerRotation = player.gameObject.transform.rotation.y;
-        //Quaternion bombRotation = new Quaternion (0, playerRotation, 0, 0);
 
         transform.position = player.transform.position + (player.transform.forward * 3);
         transform.rotation = player.transform.rotation;

@@ -25,6 +25,9 @@ public class vehicleMovement : MonoBehaviour {
     private Texture display;
 
     public GameObject BombPrefab;
+    public GameObject OilPrefab;
+    public GameObject spawner;
+
 
     // Use this for initialization
     void Start () {
@@ -82,7 +85,8 @@ public class vehicleMovement : MonoBehaviour {
         }
 
         if (hp == 0) {
-            gameObject.SetActive (false);
+            transform.position = spawner.transform.position;
+            hp = 3;
         }
 
         //if (onGround) {
@@ -167,13 +171,24 @@ public class vehicleMovement : MonoBehaviour {
         }
 
         if (other.gameObject.CompareTag ("Grav")) {
-            gameObject.GetComponent<Rigidbody> ().AddForce (new Vector3 (0, 100, 0), ForceMode.Impulse);
+            gameObject.GetComponent<Rigidbody> ().AddForce (new Vector3 (0, -30, 0), ForceMode.Impulse);
         }
 
+        if (other.gameObject.CompareTag ("Death")) {
+            transform.position = spawner.transform.position;
+        }
+
+        if (other.gameObject.CompareTag ("Oil")) {
+            speed /= 2;
+        }
+            
     }
 
     void OnTriggerExit(Collider other){
         if (other.gameObject.CompareTag ("Slow Pad")) {
+            speed *= 2;
+        }
+        if (other.gameObject.CompareTag ("Oil")) {
             speed *= 2;
         }
     }
@@ -212,6 +227,10 @@ public class vehicleMovement : MonoBehaviour {
             speed = maxSpeed * 2;
             boost = true;
             boostTimer = 3f;
+            break;
+        case "oil":
+            GameObject o = Instantiate (OilPrefab);
+            o.GetComponent<Oil> ().Initialize (playerNumber);
             break;
         default:
             break;
