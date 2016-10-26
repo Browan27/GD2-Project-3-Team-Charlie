@@ -26,6 +26,9 @@ public class vehicleMovement : MonoBehaviour {
 
     public GameObject BombPrefab;
     public GameObject OilPrefab;
+    public GameObject MinePrefab;
+    public GameObject CaltropPrefab;
+    public GameObject TurretPrefab;
     public GameObject spawner;
 
 
@@ -156,7 +159,7 @@ public class vehicleMovement : MonoBehaviour {
     {
         if (other.gameObject.CompareTag ("Pick Up") && hasItem == false)
         {
-            int pick = Random.Range (0, 7);
+            int pick = Random.Range (0, 11);
             display = other.gameObject.GetComponent<ItemBoxRotator> ().pickups [pick];
             other.gameObject.SetActive (false);
             hasItem = true;
@@ -231,6 +234,18 @@ public class vehicleMovement : MonoBehaviour {
         case "oil":
             GameObject o = Instantiate (OilPrefab);
             o.GetComponent<Oil> ().Initialize (playerNumber);
+            break;
+        case "mine":
+            GameObject m = Instantiate (MinePrefab);
+            m.GetComponent<Mine>().Initialize(playerNumber);
+            break;
+        case "caltrop":
+            GameObject c = Instantiate (CaltropPrefab);
+            c.GetComponent<Caltrop>().Initialize(playerNumber);
+            break;
+        case "turret":
+            GameObject t = Instantiate (TurretPrefab);
+            t.GetComponent<Turret>().Initialize(playerNumber);
             break;
         default:
             break;

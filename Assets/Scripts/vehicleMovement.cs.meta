@@ -1,10 +1,22 @@
 fileFormatVersion: 2
 guid: 711db47faa10b064194203672893d9df
-timeCreated: 1476296593
+timeCreated: 1477492601
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - noItem: {instanceID: 0}
+  - BombPrefab: {fileID: 1000012817701210, guid: 11653cd95a919dc4784ebc843cbfb6ee,
+      type: 2}
+  - OilPrefab: {fileID: 1000014159875052, guid: 75d6aa0fae112dd4187b3bef7898490e,
+      type: 2}
+  - minePrefab: {fileID: 1000011274370760, guid: 332ddcd9458c8764aa1ea2c8eb19d7a4,
+      type: 2}
+  - caltropPrefab: {fileID: 1000010758789106, guid: 1d5f60066f7edce4f865150480c0a3cd,
+      type: 2}
+  - turretPrefab: {fileID: 1000010488879762, guid: 8f42ebd4c83199f41ad14f5732b090e3,
+      type: 2}
+  - spawner: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

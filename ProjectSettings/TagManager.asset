@@ -14,8 +14,9 @@ TagManager:
   - Wall
   - Player1
   - Player2
-  - Bomb
+  - Caltrop
   - Death
+  - Oil
   layers:
   - Default
   - TransparentFX

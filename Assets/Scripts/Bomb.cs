@@ -5,7 +5,6 @@ public class Bomb : MonoBehaviour {
 
     GameObject player;
     int playerNumber;
-    int bounces;
 
     public void Initialize(int p){
         playerNumber = p;
