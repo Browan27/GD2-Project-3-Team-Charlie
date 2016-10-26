@@ -21,7 +21,7 @@ public class Mine : MonoBehaviour {
         if (col.collider.CompareTag("Player" + playerNumber)) {
         }
         else{
-            col.rigidbody.AddExplosionForce (20, transform.position, 10);
+            col.rigidbody.AddExplosionForce (50, transform.position, 10);
             GameObject.Destroy(this.gameObject);
 
         }

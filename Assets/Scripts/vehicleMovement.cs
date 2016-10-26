@@ -20,6 +20,7 @@ public class vehicleMovement : MonoBehaviour {
     private bool onGround;
     private bool hasItem;
     private bool boost;
+    private bool inOil;
 
     public Texture noItem;
     private Texture display;
@@ -37,6 +38,7 @@ public class vehicleMovement : MonoBehaviour {
         display = noItem;
         hasItem = false;
         boost = false;
+        inOil = false;
         boostTimer = 0f;
 
         translation = 0;
@@ -112,7 +114,7 @@ public class vehicleMovement : MonoBehaviour {
                 speed += acceleration * Time.deltaTime;
             }
         //}
-
+        
         if (!Input.GetButton ("Accelerate" + playerNumber) && !Input.GetButton ("Reverse" + playerNumber) && (speed > -0.01 && speed < 0.01)) {
             speed = 0;
         }
@@ -182,19 +184,19 @@ public class vehicleMovement : MonoBehaviour {
         }
 
         if (other.gameObject.CompareTag ("Oil")) {
-            speed = -speed * 2;
+            //inOil = true;
+            speed /= 2;
+            maxSpeed /= 2;
         }
             
     }
 
-    /*void OnTriggerExit(Collider other){
-        if (other.gameObject.CompareTag ("Slow Pad")) {
-            speed *= 2;
-        }
+    void OnTriggerExit(Collider other){
         if (other.gameObject.CompareTag ("Oil")) {
-            speed *= 2;
+            //inOil = false;
+            maxSpeed *= 2;
         }
-    }*/
+    }
 
     void OnGUI(){
         //GUI.Label (new Rect (50, 100, 200, 200), onGround.ToString ());
