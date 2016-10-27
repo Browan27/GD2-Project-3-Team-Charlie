@@ -18,12 +18,7 @@ public class Mine : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision col){
-        if (col.collider.CompareTag("Player" + playerNumber)) {
-        }
-        else{
-            col.rigidbody.AddExplosionForce (50, transform.position, 10);
-            GameObject.Destroy(this.gameObject);
-
-        }
+        col.rigidbody.AddExplosionForce (50, transform.position, 20);
+        GameObject.Destroy(this.gameObject);
     }
 }

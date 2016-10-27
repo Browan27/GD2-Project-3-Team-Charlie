@@ -9,6 +9,7 @@ public class vehicleMovement : MonoBehaviour {
     public int playerNumber;
 
     private int hp;
+    private int defaultHP;
 
     private float maxSpeed;
     private float speed;
@@ -16,6 +17,8 @@ public class vehicleMovement : MonoBehaviour {
     private float rotationSpeed;
     private float translation;
     private float boostTimer;
+    private float standardSFriction;
+    private float standardDFriction;
 
     private bool onGround;
     private bool hasItem;
@@ -30,6 +33,7 @@ public class vehicleMovement : MonoBehaviour {
     public GameObject MinePrefab;
     public GameObject CaltropPrefab;
     public GameObject TurretPrefab;
+    public GameObject SawPrefab;
     public GameObject spawner;
 
 
@@ -40,6 +44,8 @@ public class vehicleMovement : MonoBehaviour {
         boost = false;
         inOil = false;
         boostTimer = 0f;
+        standardDFriction = GetComponent<Collider> ().material.dynamicFriction;
+        standardSFriction = GetComponent<Collider> ().material.staticFriction;
 
         translation = 0;
         speed = 0.0f;
@@ -50,6 +56,7 @@ public class vehicleMovement : MonoBehaviour {
             acceleration = 20.0f;
             rotationSpeed = 120f;
             hp = 2;
+            defaultHP = hp;
             break;
         case 1:
             //Car
@@ -57,6 +64,7 @@ public class vehicleMovement : MonoBehaviour {
             acceleration = 1.5f;
             rotationSpeed = 110f;
             hp = 3;
+            defaultHP = hp;
             break;
         case 2:
             //Truck
@@ -64,6 +72,7 @@ public class vehicleMovement : MonoBehaviour {
             acceleration = 20.0f;
             rotationSpeed = 100f;
             hp = 4;
+            defaultHP = hp;
             break;
         default:
             //Assume Car
@@ -91,7 +100,7 @@ public class vehicleMovement : MonoBehaviour {
 
         if (hp == 0) {
             transform.position = spawner.transform.position;
-            hp = 3;
+            hp = defaultHP;
         }
 
         //if (onGround) {
@@ -188,6 +197,20 @@ public class vehicleMovement : MonoBehaviour {
             speed /= 2;
             maxSpeed /= 2;
         }
+
+        if(other.gameObject.CompareTag("Caltrop")){
+            GetComponent<Collider> ().material.dynamicFriction = 0;
+            GetComponent<Collider> ().material.staticFriction = 0;
+        }
+        if (other.gameObject.CompareTag ("Wrench")) {
+            hp = defaultHP;
+            GetComponent<Collider> ().material.dynamicFriction = standardDFriction;
+            GetComponent<Collider> ().material.staticFriction = standardSFriction;
+            other.gameObject.SetActive (false);
+        }
+        if (other.gameObject.CompareTag ("Saw")) {
+            hp -= 1;
+        }
             
     }
 
@@ -204,19 +227,19 @@ public class vehicleMovement : MonoBehaviour {
         case 1:
             GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
             GUI.Label(new Rect(0, 100, 200, 200), speed.ToString());
-            //GUI.Label(new Rect(0, 110, 200, 200), boost.ToString());
+            GUI.Label(new Rect(0, 110, 200, 200), hp.ToString());
             //GUI.Label(new Rect(0, 120, 200, 200), boostTimer.ToString());
             break;
         case 2:
             GUI.DrawTexture (new Rect (Screen.width / 2, 0, 128, 80), display);
             GUI.Label(new Rect(Screen.width / 2, 100, 200, 200), speed.ToString());
-           // GUI.Label(new Rect(Screen.width / 2, 110, 200, 200), boost.ToString());
+            GUI.Label(new Rect(Screen.width / 2, 110, 200, 200), hp.ToString());
             //GUI.Label(new Rect(Screen.width / 2, 120, 200, 200), boostTimer.ToString());
             break;
         default:
             GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
             GUI.Label(new Rect(0, 100, 200, 200), speed.ToString());
-           // GUI.Label(new Rect(0, 110, 200, 200), boost.ToString());
+            GUI.Label(new Rect(0, 110, 200, 200), hp.ToString());
            // GUI.Label(new Rect(0, 120, 200, 200), boostTimer.ToString());
             break;
         }
@@ -248,6 +271,12 @@ public class vehicleMovement : MonoBehaviour {
         case "turret":
             GameObject t = Instantiate (TurretPrefab);
             t.GetComponent<Turret>().Initialize(playerNumber);
+            break;
+        case "saw":
+            GameObject s = Instantiate (SawPrefab);
+            GameObject a = Instantiate (SawPrefab);
+            s.GetComponent<Saw> ().Initialize (gameObject, 2);
+            a.GetComponent<Saw> ().Initialize (gameObject, -2);
             break;
         default:
             break;
