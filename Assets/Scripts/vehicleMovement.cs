@@ -17,13 +17,15 @@ public class vehicleMovement : MonoBehaviour {
     private float rotationSpeed;
     private float translation;
     private float boostTimer;
+    private float invincTimer;
     private float standardSFriction;
     private float standardDFriction;
 
-    private bool onGround;
     private bool hasItem;
     private bool boost;
     private bool inOil;
+    private bool isShielded;
+    private bool invincible;
 
     public Texture noItem;
     private Texture display;
@@ -43,7 +45,10 @@ public class vehicleMovement : MonoBehaviour {
         hasItem = false;
         boost = false;
         inOil = false;
+        isShielded = false;
+        invincible = false;
         boostTimer = 0f;
+        invincTimer = 0f;
         standardDFriction = GetComponent<Collider> ().material.dynamicFriction;
         standardSFriction = GetComponent<Collider> ().material.staticFriction;
 
@@ -86,7 +91,14 @@ public class vehicleMovement : MonoBehaviour {
 	
     // Update is called once per frame
     void Update () {
-        
+        if (invincTimer > 0) {
+            invincTimer -= 1 * Time.deltaTime;
+        }
+
+        if (invincTimer <= 0) {
+            invincible = false;
+        }
+
         if(boost == true)
         {
             speed = maxSpeed * 2;
@@ -102,27 +114,25 @@ public class vehicleMovement : MonoBehaviour {
             transform.position = spawner.transform.position;
             hp = defaultHP;
         }
+        if (speed > maxSpeed)
+        {
+            speed -= acceleration * Time.deltaTime * 1.25f;
+        }
 
-        //if (onGround) {
-            if (speed > maxSpeed)
-            {
-                speed -= acceleration * Time.deltaTime * 1.25f;
-            }
+        if (Input.GetButton ("Accelerate" + playerNumber) && speed <= maxSpeed) {
+            speed += acceleration * Time.deltaTime * 3;
+        } else if (speed > 0 && !Input.GetButton ("Accelerate" + playerNumber)) {
+            speed -= acceleration * Time.deltaTime * 1.25f;
+        }
 
-            if (Input.GetButton ("Accelerate" + playerNumber) && speed <= maxSpeed) {
-                speed += acceleration * Time.deltaTime * 3;
-            } else if (speed > 0 && !Input.GetButton ("Accelerate" + playerNumber)) {
-                speed -= acceleration * Time.deltaTime * 1.25f;
-            }
+        if (Input.GetButton("Reverse" + playerNumber) && speed >= 0) {
+            speed -= acceleration * Time.deltaTime * 4;
+        } else if (Input.GetButton ("Reverse" + playerNumber) && speed >= -(maxSpeed)) {
+            speed -= acceleration * Time.deltaTime * 2;
+        } else if (speed < 0 && !Input.GetButton ("Reverse" + playerNumber)) {
+            speed += acceleration * Time.deltaTime;
+        }
 
-            if (Input.GetButton("Reverse" + playerNumber) && speed >= 0) {
-                speed -= acceleration * Time.deltaTime * 4;
-            } else if (Input.GetButton ("Reverse" + playerNumber) && speed >= -(maxSpeed)) {
-                speed -= acceleration * Time.deltaTime * 2;
-            } else if (speed < 0 && !Input.GetButton ("Reverse" + playerNumber)) {
-                speed += acceleration * Time.deltaTime;
-            }
-        //}
         
         if (!Input.GetButton ("Accelerate" + playerNumber) && !Input.GetButton ("Reverse" + playerNumber) && (speed > -0.01 && speed < 0.01)) {
             speed = 0;
@@ -150,19 +160,13 @@ public class vehicleMovement : MonoBehaviour {
     void OnCollisionEnter(Collision col){
         if(col.collider.CompareTag("Ramp")){
             transform.rotation = Quaternion.Slerp (transform.rotation, col.transform.rotation, 0);
-            onGround = true;
-        }
-        if (col.collider.CompareTag ("Ground")) {
-            onGround = true;
         }
         if (col.collider.CompareTag ("Hazard")) {
-            hp -= 1;
-        }
-    }
-
-    void OnCollisionExit(Collision col){
-        if (col.collider.CompareTag ("Ramp") || col.collider.CompareTag ("Ground")) {
-            onGround = false;
+            if (isShielded) {
+                isShielded = false;
+            } else if (!invincible) {
+                hp -= 1;
+            }
         }
     }
 
@@ -193,23 +197,37 @@ public class vehicleMovement : MonoBehaviour {
         }
 
         if (other.gameObject.CompareTag ("Oil")) {
-            //inOil = true;
-            speed /= 2;
-            maxSpeed /= 2;
+            if (isShielded) {
+                isShielded = false;
+            } else if(!invincible){
+                //inOil = true;
+                speed /= 2;
+                maxSpeed /= 2;
+            }
         }
 
         if(other.gameObject.CompareTag("Caltrop")){
-            GetComponent<Collider> ().material.dynamicFriction = 0;
-            GetComponent<Collider> ().material.staticFriction = 0;
+            if (isShielded) {
+                isShielded = false;
+            } else if(!invincible){
+                GetComponent<Collider> ().material.dynamicFriction = 0;
+                GetComponent<Collider> ().material.staticFriction = 0;
+            }
         }
+
         if (other.gameObject.CompareTag ("Wrench")) {
             hp = defaultHP;
             GetComponent<Collider> ().material.dynamicFriction = standardDFriction;
             GetComponent<Collider> ().material.staticFriction = standardSFriction;
             other.gameObject.SetActive (false);
         }
+
         if (other.gameObject.CompareTag ("Saw")) {
-            hp -= 1;
+            if (isShielded) {
+                isShielded = false;
+            } else if (!invincible) {
+                hp -= 1;
+            }
         }
             
     }
@@ -222,7 +240,6 @@ public class vehicleMovement : MonoBehaviour {
     }
 
     void OnGUI(){
-        //GUI.Label (new Rect (50, 100, 200, 200), onGround.ToString ());
         switch (playerNumber) {
         case 1:
             GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
@@ -277,6 +294,13 @@ public class vehicleMovement : MonoBehaviour {
             GameObject a = Instantiate (SawPrefab);
             s.GetComponent<Saw> ().Initialize (gameObject, 2);
             a.GetComponent<Saw> ().Initialize (gameObject, -2);
+            break;
+        case "shield":
+            isShielded = true;
+            break;
+        case "invinc":
+            invincible = true;
+            invincTimer = 5f;
             break;
         default:
             break;
