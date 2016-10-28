@@ -12,6 +12,7 @@ public class vehicleMovement : MonoBehaviour {
     private int defaultHP;
 
     private float maxSpeed;
+    private float tempSpeed;
     private float speed;
     private float acceleration;
     private float rotationSpeed;
@@ -26,6 +27,8 @@ public class vehicleMovement : MonoBehaviour {
     private bool inOil;
     private bool isShielded;
     private bool invincible;
+
+    private Collider item;
 
     public Texture noItem;
     private Texture display;
@@ -87,6 +90,7 @@ public class vehicleMovement : MonoBehaviour {
             hp = 3;
             break;
         }
+        tempSpeed = maxSpeed;
     }
 	
     // Update is called once per frame
@@ -117,6 +121,21 @@ public class vehicleMovement : MonoBehaviour {
         if (speed > maxSpeed)
         {
             speed -= acceleration * Time.deltaTime * 1.25f;
+        }
+
+        if (inOil)
+        {
+            if(item != null)
+            {
+                maxSpeed = tempSpeed / 2;
+                speed /= 2;
+            }
+            else
+            {
+                item = null;
+                inOil = false;
+                maxSpeed = tempSpeed;
+            }
         }
 
         if (Input.GetButton ("Accelerate" + playerNumber) && speed <= maxSpeed) {
@@ -199,10 +218,9 @@ public class vehicleMovement : MonoBehaviour {
         if (other.gameObject.CompareTag ("Oil")) {
             if (isShielded) {
                 isShielded = false;
-            } else if(!invincible){
-                //inOil = true;
-                speed /= 2;
-                maxSpeed /= 2;
+            } else if(!invincible && !inOil){
+                inOil = true;
+                item = other;
             }
         }
 
@@ -234,8 +252,8 @@ public class vehicleMovement : MonoBehaviour {
 
     void OnTriggerExit(Collider other){
         if (other.gameObject.CompareTag ("Oil")) {
-            //inOil = false;
-            maxSpeed *= 2;
+            inOil = false;
+            maxSpeed = tempSpeed;
         }
     }
 
@@ -245,13 +263,13 @@ public class vehicleMovement : MonoBehaviour {
             GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
             GUI.Label(new Rect(0, 100, 200, 200), speed.ToString());
             GUI.Label(new Rect(0, 110, 200, 200), hp.ToString());
-            //GUI.Label(new Rect(0, 120, 200, 200), boostTimer.ToString());
+            //GUI.Label(new Rect(0, 120, 200, 200), inOil.ToString());
             break;
         case 2:
             GUI.DrawTexture (new Rect (Screen.width / 2, 0, 128, 80), display);
             GUI.Label(new Rect(Screen.width / 2, 100, 200, 200), speed.ToString());
             GUI.Label(new Rect(Screen.width / 2, 110, 200, 200), hp.ToString());
-            //GUI.Label(new Rect(Screen.width / 2, 120, 200, 200), boostTimer.ToString());
+            //GUI.Label(new Rect(Screen.width / 2, 120, 200, 200), inOil.ToString());
             break;
         default:
             GUI.DrawTexture (new Rect (0, 0, 128, 80), display);

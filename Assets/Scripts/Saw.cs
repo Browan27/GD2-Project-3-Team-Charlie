@@ -16,6 +16,7 @@ public class Saw : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        transform.parent = player.transform;
         transform.position = player.transform.position - (player.transform.forward * space);
     }
 
