@@ -101,6 +101,7 @@ public class vehicleMovement : MonoBehaviour {
 
         if (invincTimer <= 0) {
             invincible = false;
+            gameObject.GetComponent<Light> ().enabled = false;
         }
 
         if(boost == true)
@@ -183,6 +184,7 @@ public class vehicleMovement : MonoBehaviour {
         if (col.collider.CompareTag ("Hazard")) {
             if (isShielded) {
                 isShielded = false;
+                gameObject.GetComponent<Light> ().enabled = false;
             } else if (!invincible) {
                 hp -= 1;
             }
@@ -218,6 +220,7 @@ public class vehicleMovement : MonoBehaviour {
         if (other.gameObject.CompareTag ("Oil")) {
             if (isShielded) {
                 isShielded = false;
+                gameObject.GetComponent<Light> ().enabled = false;
             } else if(!invincible && !inOil){
                 inOil = true;
                 item = other;
@@ -227,6 +230,7 @@ public class vehicleMovement : MonoBehaviour {
         if(other.gameObject.CompareTag("Caltrop")){
             if (isShielded) {
                 isShielded = false;
+                gameObject.GetComponent<Light> ().enabled = false;
             } else if(!invincible){
                 GetComponent<Collider> ().material.dynamicFriction = 0;
                 GetComponent<Collider> ().material.staticFriction = 0;
@@ -243,6 +247,7 @@ public class vehicleMovement : MonoBehaviour {
         if (other.gameObject.CompareTag ("Saw")) {
             if (isShielded) {
                 isShielded = false;
+                gameObject.GetComponent<Light> ().enabled = false;
             } else if (!invincible) {
                 hp -= 1;
             }
@@ -315,10 +320,16 @@ public class vehicleMovement : MonoBehaviour {
             break;
         case "shield":
             isShielded = true;
+            invincTimer = 5f;
+            gameObject.GetComponent<Light> ().enabled = true;
             break;
         case "invinc":
             invincible = true;
             invincTimer = 5f;
+            gameObject.GetComponent<Light> ().enabled = true;
+            break;
+        case "slow":
+            
             break;
         default:
             break;
