@@ -18,12 +18,14 @@ public class vehicleMovement : MonoBehaviour {
     private float rotationSpeed;
     private float translation;
     private float boostTimer;
+    private float slowTimer;
     private float invincTimer;
     private float standardSFriction;
     private float standardDFriction;
 
     private bool hasItem;
     private bool boost;
+    private bool slow;
     private bool inOil;
     private bool isShielded;
     private bool invincible;
@@ -51,6 +53,7 @@ public class vehicleMovement : MonoBehaviour {
         isShielded = false;
         invincible = false;
         boostTimer = 0f;
+        slowTimer = 0f;
         invincTimer = 0f;
         standardDFriction = GetComponent<Collider> ().material.dynamicFriction;
         standardSFriction = GetComponent<Collider> ().material.staticFriction;
@@ -108,11 +111,27 @@ public class vehicleMovement : MonoBehaviour {
         {
             speed = maxSpeed * 2;
         }
+
+        if (slow == true)
+        {
+            maxSpeed = tempSpeed / 4 * 3;
+        }
+
         if (boostTimer > 0){
             boostTimer -= 1 * Time.deltaTime;
         }
         if(boostTimer < 0 && boost == true) {
             boost = false;
+        }
+
+        if (slowTimer > 0)
+        {
+            slowTimer -= 1 * Time.deltaTime;
+        }
+        if (slowTimer < 0 && boost == true)
+        {
+            slow = false;
+            maxSpeed = tempSpeed;
         }
 
         if (hp == 0) {
@@ -206,7 +225,8 @@ public class vehicleMovement : MonoBehaviour {
         }
 
         if (other.gameObject.CompareTag ("Slow Pad")) {
-            speed /= 2;
+            slow = true;
+            slowTimer = 3f;
         }
 
         if (other.gameObject.CompareTag ("Grav")) {
@@ -268,7 +288,8 @@ public class vehicleMovement : MonoBehaviour {
             GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
             GUI.Label(new Rect(0, 100, 200, 200), speed.ToString());
             GUI.Label(new Rect(0, 110, 200, 200), hp.ToString());
-            //GUI.Label(new Rect(0, 120, 200, 200), inOil.ToString());
+            GUI.Label(new Rect(0, 120, 200, 200), tempSpeed.ToString());
+            GUI.Label(new Rect(0, 130, 200, 200), maxSpeed.ToString());
             break;
         case 2:
             GUI.DrawTexture (new Rect (Screen.width / 2, 0, 128, 80), display);
@@ -329,7 +350,16 @@ public class vehicleMovement : MonoBehaviour {
             gameObject.GetComponent<Light> ().enabled = true;
             break;
         case "slow":
-            
+            for (int i = 1; i < 3; i++) {
+                    GameObject other = GameObject.FindGameObjectWithTag("Player" + i);
+                    if (i == playerNumber) { }
+                    else
+                    {
+                        other.GetComponent<vehicleMovement>().speed = maxSpeed / 2;
+                        other.GetComponent<vehicleMovement>().slow = true;
+                        other.GetComponent<vehicleMovement>().slowTimer = 3f;
+                    }
+            }
             break;
         default:
             break;
