@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GlobalController : MonoBehaviour {
     
+    public static int numPlayers;
     public GameObject player;
     public GameObject[] players;
     public Transform[] playerSpawns = new Transform[4];
@@ -10,7 +11,8 @@ public class GlobalController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        setNumberOfPlayers(2);
+        numPlayers = 2;
+        setPlayers();
     }
 	
 	// Update is called once per frame
@@ -18,9 +20,9 @@ public class GlobalController : MonoBehaviour {
         //respawnPlayer();
 	}
 
-    void setNumberOfPlayers(int num)
+    void setPlayers()
     {
-        players = new GameObject[num];
+        players = new GameObject[numPlayers];
         for (int i = 0; i < players.Length; i++)
         {
             players[i] = player;
@@ -31,6 +33,7 @@ public class GlobalController : MonoBehaviour {
             Instantiate(players[i], playerSpawns[i]);
         }
     }
+    
 
     void respawnPlayer() {
         for(int i = 0; i < players.Length; i++)
