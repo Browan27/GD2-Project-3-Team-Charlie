@@ -27,7 +27,7 @@ GameObject:
   - 108: {fileID: 108000013531030128}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player1
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicleClass: 1
-  playerNumber: 1
+  playerNumber: 2
   noItem: {fileID: 2800000, guid: 117b0ea2275759e40882ed5e58e003ad, type: 3}
   BombPrefab: {fileID: 1000012817701210, guid: 11653cd95a919dc4784ebc843cbfb6ee, type: 2}
   OilPrefab: {fileID: 1000014159875052, guid: 75d6aa0fae112dd4187b3bef7898490e, type: 2}
@@ -245,7 +245,7 @@ MonoBehaviour:
   TurretPrefab: {fileID: 1000010488879762, guid: 8f42ebd4c83199f41ad14f5732b090e3,
     type: 2}
   SawPrefab: {fileID: 1000011903194458, guid: 77b12077f50360846ae96728c3c9d567, type: 2}
-  spawner: {fileID: 1000012759015936, guid: 3d2e4b138d7d3884083b7463abedb1d1, type: 2}
+  spawner: {fileID: 0}
 --- !u!124 &124000012069424178
 Behaviour:
   m_ObjectHideFlags: 1

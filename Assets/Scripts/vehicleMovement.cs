@@ -41,11 +41,15 @@ public class vehicleMovement : MonoBehaviour {
     public GameObject CaltropPrefab;
     public GameObject TurretPrefab;
     public GameObject SawPrefab;
-    public GameObject spawner;
+    public Transform spawner;
+
+    private GlobalController GC;
 
 
     // Use this for initialization
     void Start () {
+        GC = GameObject.Find("GlobalController").GetComponent<GlobalController>();
+
         display = noItem;
         hasItem = false;
         boost = false;
@@ -350,16 +354,7 @@ public class vehicleMovement : MonoBehaviour {
             gameObject.GetComponent<Light> ().enabled = true;
             break;
         case "slow":
-            for (int i = 1; i < 3; i++) {
-                    GameObject other = GameObject.FindGameObjectWithTag("Player" + i);
-                    if (i == playerNumber) { }
-                    else
-                    {
-                        other.GetComponent<vehicleMovement>().speed = maxSpeed / 2;
-                        other.GetComponent<vehicleMovement>().slow = true;
-                        other.GetComponent<vehicleMovement>().slowTimer = 3f;
-                    }
-            }
+                GameObject[] others = GC.globalUsedBy(playerNumber);
             break;
         default:
             break;
