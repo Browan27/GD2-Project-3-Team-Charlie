@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void HowToPlay(string name)
 	{
-		UnityEngine.SceneManagement.SceneManager.LoadScene ("HowToPlay");
+		//UnityEngine.SceneManagement.SceneManager.LoadScene ("HowToPlay");
 	}
 
 	public void ExitBacktoMenu (string name)
