@@ -221,7 +221,8 @@ public class vehicleMovement : MonoBehaviour {
         transform.Rotate(xRotation, yRotation, zRotation);
         
         if(loser) {
-            gameObject.GetComponent<Light> ().enabled = true;
+            Behaviour halo = (Behaviour)GetComponent("Halo");
+            halo.enabled = true;
         }
     }
     

@@ -14,7 +14,7 @@ public class Bomb : MonoBehaviour {
 	void Start () {
         player = GameObject.FindGameObjectWithTag ("Player" + playerNumber);
 
-        transform.position = player.transform.position + (player.transform.forward * 3);
+        transform.position = player.transform.position + (player.transform.forward * 7);
         transform.rotation = player.transform.rotation;
         gameObject.GetComponent<Rigidbody> ().AddRelativeForce (new Vector3 (0, 0, 50), ForceMode.Impulse);
 	}

@@ -13,7 +13,7 @@ public class Mine : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag ("Player" + playerNumber);
-        transform.position = player.transform.position - (player.transform.forward * 2);
+        transform.position = player.transform.position - (player.transform.forward * 6);
         //transform.position -= new Vector3 (0, f);
     }
 

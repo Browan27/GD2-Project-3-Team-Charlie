@@ -16,8 +16,8 @@ public class Caltrop : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag ("Player" + playerNumber);
-        transform.position = player.transform.position - (player.transform.forward * 7);
-        transform.position -= new Vector3(0,0.49f);
+        transform.position = player.transform.position - (player.transform.forward * 11);
+        transform.position -= new Vector3(0,1.0f);
     }
 
     void Update(){

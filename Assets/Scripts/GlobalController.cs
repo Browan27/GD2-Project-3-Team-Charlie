@@ -13,7 +13,7 @@ public class GlobalController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        numPlayers = 2;
+        numPlayers = 4;
         setPlayers();
         countdown = 0f;
     }
@@ -39,7 +39,8 @@ public class GlobalController : MonoBehaviour {
             players[i].name = "Player" + (i+1);
             players[i].tag = "Player" + (i+1);
             Instantiate(players[i], playerSpawns[i]);
-            players[i].transform.position += Vector3.up * (i * 10.0f);
+            players[i].transform.position = playerSpawns[i].position;
+            players[i].transform.rotation = playerSpawns[i].rotation;
         }
     }
     
