@@ -9,36 +9,20 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000011602994170}
+  m_RootGameObject: {fileID: 1000012677726460}
   m_IsPrefabParent: 1
---- !u!1 &1000011602994170
+--- !u!1 &1000011862288734
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000011448847234}
-  - 114: {fileID: 114000011595024756}
-  m_Layer: 0
-  m_Name: Box Respawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1000012754999578
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 4000010280357170}
-  - 33: {fileID: 33000010779032986}
-  - 65: {fileID: 65000011162228062}
-  - 23: {fileID: 23000013463766706}
-  - 114: {fileID: 114000014077333352}
+  - 4: {fileID: 4000011282859286}
+  - 33: {fileID: 33000010925835448}
+  - 65: {fileID: 65000013850019318}
+  - 23: {fileID: 23000010396008284}
+  - 114: {fileID: 114000012275353484}
   m_Layer: 0
   m_Name: Item Box
   m_TagString: Pick Up
@@ -46,39 +30,55 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000010280357170
+--- !u!1 &1000012677726460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000010768486582}
+  - 114: {fileID: 114000010245578216}
+  m_Layer: 0
+  m_Name: Box Respawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000010768486582
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012754999578}
+  m_GameObject: {fileID: 1000012677726460}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 4000011282859286}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &4000011282859286
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011862288734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: -11.83}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 4000011448847234}
+  m_Father: {fileID: 4000010768486582}
   m_RootOrder: 0
---- !u!4 &4000011448847234
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011602994170}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children:
-  - {fileID: 4000010280357170}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
---- !u!23 &23000013463766706
+--- !u!23 &23000010396008284
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012754999578}
+  m_GameObject: {fileID: 1000011862288734}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -102,43 +102,43 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &33000010779032986
+--- !u!33 &33000010925835448
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012754999578}
+  m_GameObject: {fileID: 1000011862288734}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65000011162228062
+--- !u!65 &65000013850019318
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012754999578}
+  m_GameObject: {fileID: 1000011862288734}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114000011595024756
+--- !u!114 &114000010245578216
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011602994170}
+  m_GameObject: {fileID: 1000012677726460}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ad3be2b891cca74e8f52f67ca40f975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  box: {fileID: 1000012754999578}
---- !u!114 &114000014077333352
+  box: {fileID: 1000011862288734}
+--- !u!114 &114000012275353484
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012754999578}
+  m_GameObject: {fileID: 1000011862288734}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37b1323853e8889418c7af5ccc1c51ca, type: 3}
@@ -146,13 +146,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickups:
   - {fileID: 2800000, guid: 3ccdca150bce6134ab9d720539d268e0, type: 3}
-  - {fileID: 2800000, guid: 6fc39e317b9cbea4cb9522a54567552f, type: 3}
+  - {fileID: 2800000, guid: 5c4a95eb6cff6014c86d62b8846d068f, type: 3}
   - {fileID: 2800000, guid: 9a624dd5e7afed64fb34ffa20b5f1a6c, type: 3}
   - {fileID: 2800000, guid: e0803064edf423a419be277f665931c2, type: 3}
-  - {fileID: 2800000, guid: 4d7f8be99e59e924183d7924e8e7b422, type: 3}
-  - {fileID: 2800000, guid: 568baf7325ce49d4a82a2c7c9d873efd, type: 3}
+  - {fileID: 2800000, guid: 9a624dd5e7afed64fb34ffa20b5f1a6c, type: 3}
+  - {fileID: 2800000, guid: 9a624dd5e7afed64fb34ffa20b5f1a6c, type: 3}
   - {fileID: 2800000, guid: 4ce85674afbd7af499b63354712f4a72, type: 3}
-  - {fileID: 2800000, guid: 5efdb0b242e180047b5e1748f3531fa6, type: 3}
+  - {fileID: 2800000, guid: 8ef7e3bd468a5cf4aba34a9c2d955f9c, type: 3}
   - {fileID: 2800000, guid: 71c25bf0cd3d9c549abe13486b48ef5f, type: 3}
   - {fileID: 2800000, guid: 32b4204eefe7aee42b6a789d50a61f90, type: 3}
   - {fileID: 2800000, guid: df1230e650f70f041b6999fa7942f8f1, type: 3}

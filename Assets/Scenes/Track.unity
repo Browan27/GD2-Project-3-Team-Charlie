@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 88ec9a13802800449aaf825aff3aadc7, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -133,6 +133,10 @@ Prefab:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 31ef5e4051b11c743bea07f13c839387, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1f9afb875daa26144bfce8e9d4c5c058, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 31ef5e4051b11c743bea07f13c839387, type: 3}
   m_IsPrefabParent: 0
@@ -200,7 +204,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011273654604, guid: bd25bb4a3b05be446864d1d97900f9aa, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000011273654604, guid: bd25bb4a3b05be446864d1d97900f9aa, type: 2}
       propertyPath: m_LocalPosition.z
@@ -309,7 +313,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011273654604, guid: bd25bb4a3b05be446864d1d97900f9aa, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000011273654604, guid: bd25bb4a3b05be446864d1d97900f9aa, type: 2}
       propertyPath: m_LocalPosition.z
@@ -619,7 +623,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014138862000, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4000014138862000, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
       propertyPath: m_LocalRotation.z
@@ -627,7 +631,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000014138862000, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4000014138862000, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
       propertyPath: m_RootOrder
@@ -659,7 +663,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011115055886, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000011115055886, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
       propertyPath: m_LocalPosition.y
@@ -667,11 +671,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011115055886, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4000011532360948, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4000011532360948, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
       propertyPath: m_LocalPosition.y
@@ -679,7 +683,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011532360948, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000014138862000, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90cc28538833af140882b66bdf3e2e3b, type: 2}
@@ -811,7 +819,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011273654604, guid: bd25bb4a3b05be446864d1d97900f9aa, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000011273654604, guid: bd25bb4a3b05be446864d1d97900f9aa, type: 2}
       propertyPath: m_LocalPosition.z

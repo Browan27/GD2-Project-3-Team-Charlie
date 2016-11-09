@@ -93,7 +93,7 @@ public class GlobalController : MonoBehaviour {
     
     void OnGUI(){
         if(gameOver) {
-            GUI.Label(new Rect(0, 100, 200, 200), "Player " + victor + " is victorious!");
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 400, 400), "Player " + victor + " is victorious!");
         }
     }
 }

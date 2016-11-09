@@ -335,14 +335,21 @@ public class vehicleMovement : MonoBehaviour {
             GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
             GUI.Label(new Rect(0, 100, 200, 200), speed.ToString());
             GUI.Label(new Rect(0, 110, 200, 200), hp.ToString());
-            GUI.Label(new Rect(0, 120, 200, 200), tempSpeed.ToString());
-            GUI.Label(new Rect(0, 130, 200, 200), maxSpeed.ToString());
             break;
         case 2:
             GUI.DrawTexture (new Rect (Screen.width / 2, 0, 128, 80), display);
             GUI.Label(new Rect(Screen.width / 2, 100, 200, 200), speed.ToString());
             GUI.Label(new Rect(Screen.width / 2, 110, 200, 200), hp.ToString());
-            //GUI.Label(new Rect(Screen.width / 2, 120, 200, 200), inOil.ToString());
+            break;
+        case 3:
+            GUI.DrawTexture (new Rect (0, Screen.height / 2 + 0, 128, 80), display);
+            GUI.Label(new Rect(0, Screen.height / 2 + 100, 200, 200), speed.ToString());
+            GUI.Label(new Rect(0, Screen.height / 2 + 110, 200, 200), hp.ToString());
+            break;
+        case 4:
+            GUI.DrawTexture (new Rect (Screen.width / 2, Screen.height / 2 + 0, 128, 80), display);
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 100, 200, 200), speed.ToString());
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 110, 200, 200), hp.ToString());
             break;
         }
     }
