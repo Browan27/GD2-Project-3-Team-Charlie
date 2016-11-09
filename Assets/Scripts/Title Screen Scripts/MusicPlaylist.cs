@@ -8,8 +8,7 @@ public class MusicPlaylist : MonoBehaviour {
     private GlobalController GC;
 
 	void Start () {
-        GC = GameObject.Find("GlobalController").GetComponent<GlobalController>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GameObject.Find("MusicBox").GetComponent<AudioSource>();
 		audioSource.loop = false;
 
 	}
@@ -21,9 +20,7 @@ public class MusicPlaylist : MonoBehaviour {
 	//Update is called once per frame
 	void Update() {
 
-        if (GC.gameOver) {
-            audioSource.Stop();
-        } else if (!audioSource.isPlaying) {
+        if (!audioSource.isPlaying) {
 			audioSource.clip = GetRandomClip();
 			audioSource.Play();
 		}

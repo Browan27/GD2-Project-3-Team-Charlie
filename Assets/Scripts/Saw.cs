@@ -6,7 +6,7 @@ public class Saw : MonoBehaviour {
     GameObject player;
 
     float lifetime = 5;
-    float rotationSpeed = 90;
+    float rotationSpeed = 180;
     float space;
 
     public void Initialize(GameObject p, float s){

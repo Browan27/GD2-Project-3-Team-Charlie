@@ -8,16 +8,24 @@ public class GlobalController : MonoBehaviour {
     public GameObject[] players;
     public Transform[] playerSpawns = new Transform[4];
     public bool gameOver;
+    private float countdown;
+    private int victor;
 
 	// Use this for initialization
 	void Start () {
-        numPlayers = 4;
+        numPlayers = 2;
         setPlayers();
+        countdown = 0f;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        countLosers();
+        if(!gameOver) { countLosers(); }
+        if(countdown > 0 && gameOver) {
+            countdown -= 1 * Time.deltaTime;
+        } else if(countdown < 0 && gameOver) {
+            reset();
+        }
 	}
 
     void setPlayers()
@@ -31,6 +39,7 @@ public class GlobalController : MonoBehaviour {
             players[i].name = "Player" + (i+1);
             players[i].tag = "Player" + (i+1);
             Instantiate(players[i], playerSpawns[i]);
+            players[i].transform.position += Vector3.up * (i * 10.0f);
         }
     }
     
@@ -38,7 +47,8 @@ public class GlobalController : MonoBehaviour {
         int loserCount = 0;
         for (int i = 0; i < players.Length; i++)
         {
-            if(players[i].GetComponent<vehicleMovement>().loser) {
+            player = GameObject.FindGameObjectWithTag ("Player" + (i+1));
+            if(player.GetComponent<vehicleMovement>().loser) {
                 loserCount += 1;
             }
         }
@@ -48,7 +58,22 @@ public class GlobalController : MonoBehaviour {
     }
     
     private void declareWinner() {
+        victor = 0;
         
+        for (int i = 0; i < players.Length; i++)
+        {
+            player = GameObject.FindGameObjectWithTag ("Player" + (i+1));
+            if(!player.GetComponent<vehicleMovement>().loser) {
+                victor = i+1;
+            }
+        }
+        
+        gameOver = true;
+        countdown = 5f;
+    }
+    
+    private void reset() {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScreen");
     }
 
     public GameObject[] globalUsedBy(int playerNumber)
@@ -64,5 +89,11 @@ public class GlobalController : MonoBehaviour {
             }
         }
         return array;
+    }
+    
+    void OnGUI(){
+        if(gameOver) {
+            GUI.Label(new Rect(0, 100, 200, 200), "Player " + victor + " is victorious!");
+        }
     }
 }

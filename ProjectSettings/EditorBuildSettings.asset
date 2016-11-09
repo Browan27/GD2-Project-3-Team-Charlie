@@ -4,4 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/SelectionScreens/TitleScreen.unity
+  - enabled: 1
+    path: Assets/Scenes/SelectionScreens/Mode Select.unity
+  - enabled: 1
+    path: Assets/Scenes/Arena.unity
+  - enabled: 1
+    path: Assets/Scenes/Ring.unity
+  - enabled: 1
+    path: Assets/Scenes/Track.unity

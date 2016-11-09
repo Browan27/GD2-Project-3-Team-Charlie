@@ -219,6 +219,19 @@ public class vehicleMovement : MonoBehaviour {
 
         gameObject.GetComponent<Rigidbody>().AddRelativeForce((translation / 2 * yRotation), 0, translation, ForceMode.Force);
         transform.Rotate(xRotation, yRotation, zRotation);
+        
+        if(loser) {
+            gameObject.GetComponent<Light> ().enabled = true;
+        }
+    }
+    
+    public void gotSlowed() {
+        slow = true;
+        slowTimer = 3f;
+    }
+    
+    public void gotSmashed() {
+        hp -= 1;
     }
 
     void OnCollisionEnter(Collision col){
@@ -231,6 +244,15 @@ public class vehicleMovement : MonoBehaviour {
                 gameObject.GetComponent<Light> ().enabled = false;
             } else if (!invincible) {
                 hp -= 1;
+            }
+        }
+        
+        for (int i = 0; i < GlobalController.numPlayers; i++) {
+            GameObject player = GameObject.FindGameObjectWithTag ("Player" + (i+1));
+            if(player.GetComponent<Collider>() == col.collider) {
+                if(invincible) {
+                    player.GetComponent<vehicleMovement>().gotSmashed();
+                }
             }
         }
     }
@@ -298,7 +320,6 @@ public class vehicleMovement : MonoBehaviour {
                 hp -= 1;
             }
         }
-            
     }
 
     void OnTriggerExit(Collider other){
@@ -370,11 +391,18 @@ public class vehicleMovement : MonoBehaviour {
             gameObject.GetComponent<Light> ().enabled = true;
             break;
         case "slow":
-                GameObject[] others = GC.globalUsedBy(playerNumber);
+            for (int i = 0; i < GlobalController.numPlayers; i++) {
+                GameObject player = GameObject.FindGameObjectWithTag ("Player" + (i+1));
+                if(playerNumber == (i+1)) {}
+                else {
+                    player.GetComponent<vehicleMovement>().gotSlowed();
+                }
+            }
             break;
         default:
+            GameObject d = Instantiate (BombPrefab);
+            d.GetComponent<Bomb> ().Initialize (playerNumber);
             break;
-        
         }
     }
 
@@ -384,6 +412,7 @@ public class vehicleMovement : MonoBehaviour {
 		newAudio.loop = loop;
 		newAudio.playOnAwake = playAwake;
 		newAudio.volume = vol; 
+        newAudio.priority = playerNumber;
 		return newAudio;
 	}
 

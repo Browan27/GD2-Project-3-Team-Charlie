@@ -25,9 +25,10 @@ GameObject:
   - 54: {fileID: 54000011115860078}
   - 114: {fileID: 114000013733997530}
   - 108: {fileID: 108000013531030128}
+  - 122: {fileID: 122000014064913478}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player4
+  m_Name: Player2
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,8 +73,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012570648460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: -38.5}
-  m_LocalScale: {x: 1, y: 1, z: 2}
+  m_LocalPosition: {x: 0, y: 1442, z: -38.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 4000010415043812}
@@ -247,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicleClass: 1
-  playerNumber: 4
+  playerNumber: 2
   loser: 0
   noItem: {fileID: 2800000, guid: 117b0ea2275759e40882ed5e58e003ad, type: 3}
   BombPrefab: {fileID: 1000012817701210, guid: 11653cd95a919dc4784ebc843cbfb6ee, type: 2}
@@ -261,6 +262,17 @@ MonoBehaviour:
   spawner: {fileID: 0}
   CarAccelerating: {fileID: 8300000, guid: 07d2bc91993680c4c8e1c24d3c38760d, type: 3}
   CarDriving: {fileID: 8300000, guid: 0407b1fc63e51de42a64e205dab5ebdf, type: 3}
+--- !u!122 &122000014064913478
+Halo:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012570648460}
+  m_Enabled: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4284506367
+  m_Size: 2
 --- !u!124 &124000012069424178
 Behaviour:
   m_ObjectHideFlags: 1
