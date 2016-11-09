@@ -17,7 +17,7 @@ public class Oil : MonoBehaviour {
 	void Start () {
         player = GameObject.FindGameObjectWithTag ("Player" + playerNumber);
         transform.position = player.transform.position - (player.transform.forward * 11);
-        transform.position -= new Vector3(0,0.7f);
+        transform.position -= new Vector3(0,-0.1f);
 	}
 
     void Update(){

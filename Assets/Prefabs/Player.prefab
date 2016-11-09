@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000013148050122}
   - 33: {fileID: 33000011560403096}
   - 23: {fileID: 23000011724728654}
+  - 114: {fileID: 114000010188090758}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -42,7 +43,7 @@ GameObject:
   - 108: {fileID: 108000013531030128}
   - 122: {fileID: 122000014064913478}
   m_Layer: 0
-  m_Name: Player4
+  m_Name: Player
   m_TagString: Player4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,8 +88,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012570648460}
-  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.000004, y: 2, z: 50.000004}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 1, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -258,6 +259,22 @@ Light:
   m_BounceIntensity: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114000010188090758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011363078882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5263698fd1ec3f4cad903e969f2a7b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors:
+  - {r: 1, g: 0.11764705, b: 0.11764705, a: 0}
+  - {r: 0.13022344, g: 0.058823526, b: 1, a: 0}
+  - {r: 0.59969556, g: 0.17647058, b: 0.75, a: 0}
+  - {r: 0, g: 0.53676474, b: 0.13696747, a: 0}
 --- !u!114 &114000010993620120
 MonoBehaviour:
   m_ObjectHideFlags: 1
