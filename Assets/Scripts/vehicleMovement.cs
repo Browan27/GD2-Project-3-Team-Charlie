@@ -29,6 +29,7 @@ public class vehicleMovement : MonoBehaviour {
     private bool inOil;
     private bool isShielded;
     private bool invincible;
+    public bool loser;
 
     private Collider item;
 
@@ -44,7 +45,12 @@ public class vehicleMovement : MonoBehaviour {
     public Transform spawner;
 
     private GlobalController GC;
-
+    
+    public AudioClip CarAccelerating;
+    public AudioClip CarDriving;
+    
+    private AudioSource acceleratingAS;
+    private AudioSource drivingAS;
 
     // Use this for initialization
     void Start () {
@@ -56,12 +62,15 @@ public class vehicleMovement : MonoBehaviour {
         inOil = false;
         isShielded = false;
         invincible = false;
+        loser = false;
         boostTimer = 0f;
         slowTimer = 0f;
         invincTimer = 0f;
         standardDFriction = GetComponent<Collider> ().material.dynamicFriction;
         standardSFriction = GetComponent<Collider> ().material.staticFriction;
-		drivingAS = AddAudio (CarDriving, true, false, 0.6f);
+        
+        acceleratingAS = AddAudio(CarAccelerating, true, false, 0.6f);
+		drivingAS = AddAudio(CarDriving, true, false, 0.6f);
 
         translation = 0;
         speed = 0.0f;
@@ -99,6 +108,8 @@ public class vehicleMovement : MonoBehaviour {
             break;
         }
         tempSpeed = maxSpeed;
+        
+        transform.position = spawner.transform.position;
     }
 	
     // Update is called once per frame
@@ -142,6 +153,7 @@ public class vehicleMovement : MonoBehaviour {
         if (hp == 0) {
             transform.position = spawner.transform.position;
             hp = defaultHP;
+            loser = true;
         }
         if (speed > maxSpeed)
         {
@@ -165,10 +177,8 @@ public class vehicleMovement : MonoBehaviour {
 
         if (Input.GetButton ("Accelerate" + playerNumber) && speed <= maxSpeed) {
             speed += acceleration * Time.deltaTime * 3;
-			PlayDriving ();
         } else if (speed > 0 && !Input.GetButton ("Accelerate" + playerNumber)) {
             speed -= acceleration * Time.deltaTime * 1.25f;
-			PlayDriving ();
         }
 
         if (Input.GetButton("Reverse" + playerNumber) && speed >= 0) {
@@ -179,8 +189,16 @@ public class vehicleMovement : MonoBehaviour {
             speed += acceleration * Time.deltaTime;
         }
 
+        if (Input.GetButton ("Accelerate" + playerNumber) || Input.GetButton ("Reverse" + playerNumber)) {
+            PlayDriving();
+        }
         
         if (!Input.GetButton ("Accelerate" + playerNumber) && !Input.GetButton ("Reverse" + playerNumber) && (speed > -0.01 && speed < 0.01)) {
+            StopAccelerate();
+            StopDriving();
+        }
+        
+        if (!Input.GetButton ("Accelerate" + playerNumber) && !Input.GetButton ("Reverse" + playerNumber)) {
             speed = 0;
         }
 
@@ -242,6 +260,7 @@ public class vehicleMovement : MonoBehaviour {
 
         if (other.gameObject.CompareTag ("Death")) {
             transform.position = spawner.transform.position;
+            loser = true;
         }
 
         if (other.gameObject.CompareTag ("Oil")) {
@@ -303,12 +322,6 @@ public class vehicleMovement : MonoBehaviour {
             GUI.Label(new Rect(Screen.width / 2, 100, 200, 200), speed.ToString());
             GUI.Label(new Rect(Screen.width / 2, 110, 200, 200), hp.ToString());
             //GUI.Label(new Rect(Screen.width / 2, 120, 200, 200), inOil.ToString());
-            break;
-        default:
-            GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
-            GUI.Label(new Rect(0, 100, 200, 200), speed.ToString());
-            GUI.Label(new Rect(0, 110, 200, 200), hp.ToString());
-           // GUI.Label(new Rect(0, 120, 200, 200), boostTimer.ToString());
             break;
         }
     }
@@ -374,9 +387,27 @@ public class vehicleMovement : MonoBehaviour {
 		return newAudio;
 	}
 
-	private void PlayDriving() {
-		if(!drivingAS.isPlaying() {
+	private void PlayAccelerate() {
+		if(!acceleratingAS.isPlaying) {
+			acceleratingAS.Play();
+		}
+	}
+    
+    private void StopAccelerate() {
+		if(acceleratingAS.isPlaying) {
+			acceleratingAS.Stop();
+		}
+	}
+    
+    private void PlayDriving() {
+		if(!drivingAS.isPlaying) {
 			drivingAS.Play();
+		}
+	}
+    
+    private void StopDriving() {
+		if(drivingAS.isPlaying) {
+			drivingAS.Stop();
 		}
 	}
 }

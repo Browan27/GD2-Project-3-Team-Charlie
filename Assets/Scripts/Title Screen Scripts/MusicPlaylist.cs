@@ -8,14 +8,14 @@ public class MusicPlaylist : MonoBehaviour {
     private GlobalController GC;
 
 	void Start () {
-        GC = GameObject.Find("GameController").GetComponent<GlobalController>();
+        GC = GameObject.Find("GlobalController").GetComponent<GlobalController>();
         audioSource = GetComponent<AudioSource>();
 		audioSource.loop = false;
 
 	}
 
 	private AudioClip GetRandomClip() {
-		return clips [Random.Range (0, clips.Length)];
+		return clips[Random.Range (0, clips.Length)];
 	}
 
 	//Update is called once per frame
@@ -24,8 +24,8 @@ public class MusicPlaylist : MonoBehaviour {
         if (GC.gameOver) {
             audioSource.Stop();
         } else if (!audioSource.isPlaying) {
-			audioSource.clip = GetRandomClip ();
-			audioSource.Play ();
+			audioSource.clip = GetRandomClip();
+			audioSource.Play();
 		}
 
 	}

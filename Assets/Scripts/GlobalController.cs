@@ -11,13 +11,13 @@ public class GlobalController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        numPlayers = 2;
+        numPlayers = 4;
         setPlayers();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        //respawnPlayer();
+        countLosers();
 	}
 
     void setPlayers()
@@ -34,15 +34,21 @@ public class GlobalController : MonoBehaviour {
         }
     }
     
-
-    void respawnPlayer() {
-        for(int i = 0; i < players.Length; i++)
+    private void countLosers() {
+        int loserCount = 0;
+        for (int i = 0; i < players.Length; i++)
         {
-            if(!GameObject.Find("Player" + (i+1)))
-            {
-                Instantiate(players[i], playerSpawns[i]);
+            if(players[i].GetComponent<vehicleMovement>().loser) {
+                loserCount += 1;
             }
         }
+        if(loserCount == numPlayers-1) {
+            declareWinner();
+        }
+    }
+    
+    private void declareWinner() {
+        
     }
 
     public GameObject[] globalUsedBy(int playerNumber)
