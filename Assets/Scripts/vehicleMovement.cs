@@ -61,6 +61,7 @@ public class vehicleMovement : MonoBehaviour {
         invincTimer = 0f;
         standardDFriction = GetComponent<Collider> ().material.dynamicFriction;
         standardSFriction = GetComponent<Collider> ().material.staticFriction;
+		drivingAS = AddAudio (CarDriving, true, false, 0.6f);
 
         translation = 0;
         speed = 0.0f;
@@ -164,8 +165,10 @@ public class vehicleMovement : MonoBehaviour {
 
         if (Input.GetButton ("Accelerate" + playerNumber) && speed <= maxSpeed) {
             speed += acceleration * Time.deltaTime * 3;
+			PlayDriving ();
         } else if (speed > 0 && !Input.GetButton ("Accelerate" + playerNumber)) {
             speed -= acceleration * Time.deltaTime * 1.25f;
+			PlayDriving ();
         }
 
         if (Input.GetButton("Reverse" + playerNumber) && speed >= 0) {
@@ -361,4 +364,19 @@ public class vehicleMovement : MonoBehaviour {
         
         }
     }
+
+	private AudioSource AddAudio(AudioClip clip, bool loop, bool playAwake, float vol) {
+		AudioSource newAudio = gameObject.AddComponent<AudioSource>();
+		newAudio.clip = clip; 
+		newAudio.loop = loop;
+		newAudio.playOnAwake = playAwake;
+		newAudio.volume = vol; 
+		return newAudio;
+	}
+
+	private void PlayDriving() {
+		if(!drivingAS.isPlaying() {
+			drivingAS.Play();
+		}
+	}
 }
