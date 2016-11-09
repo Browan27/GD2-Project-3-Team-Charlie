@@ -11,14 +11,19 @@ public class LevelManager : MonoBehaviour {
 		UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
     }
 
-	public void HowToPlay(string name)
+	public void SelectionScreenMenu(string name)
 	{
-		//UnityEngine.SceneManagement.SceneManager.LoadScene ("HowToPlay");
+		UnityEngine.SceneManagement.SceneManager.LoadScene ("Mode Select");
 	}
 
-	public void ExitBacktoMenu (string name)
+	public void TrackGame(string name)
 	{
-		UnityEngine.SceneManagement.SceneManager.LoadScene ("TitleScreen");
+		UnityEngine.SceneManagement.SceneManager.LoadScene ("Track");
+	}
+
+	public void ArenaGame(string name)
+	{
+		UnityEngine.SceneManagement.SceneManager.LoadScene ("Islands");
 	}
 
 	public void QuitGame()
