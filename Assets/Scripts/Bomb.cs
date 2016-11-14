@@ -5,6 +5,7 @@ public class Bomb : MonoBehaviour {
 
     GameObject player;
     int playerNumber;
+	public GameObject Explosion;
 
     public void Initialize(int p){
         playerNumber = p;
@@ -24,6 +25,8 @@ public class Bomb : MonoBehaviour {
 
     void OnCollisionEnter(Collision col){
         if (col.collider.CompareTag ("Ground") || col.collider.CompareTag("Player" + playerNumber)) {
+			GameObject explosion = (GameObject)Instantiate (Explosion, transform.position, transform.rotation);
+			Destroy (explosion, 3);
         }
         else{
             GameObject.Destroy(this.gameObject);
