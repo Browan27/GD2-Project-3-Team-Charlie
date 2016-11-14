@@ -85,8 +85,8 @@ public class vehicleMovement : MonoBehaviour {
             break;
         case 1:
             //Car
-            maxSpeed = 1.5f;
-            acceleration = 1.5f;
+            maxSpeed = 2.0f;
+            acceleration = 2.0f;
             rotationSpeed = 110f;
             hp = 3;
             defaultHP = hp;
