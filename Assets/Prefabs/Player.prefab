@@ -88,8 +88,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012570648460}
-  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.000004, y: 2, z: 50.000004}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 1, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -301,6 +301,10 @@ MonoBehaviour:
   playerNumber: 4
   loser: 0
   noItem: {fileID: 2800000, guid: 117b0ea2275759e40882ed5e58e003ad, type: 3}
+  hpBar:
+  - {fileID: 2800000, guid: f29d123d6a3a8584d898a77e32fea76d, type: 3}
+  - {fileID: 2800000, guid: e63b0e5f8e095e946bfd72b2141eb0a9, type: 3}
+  - {fileID: 2800000, guid: 35a19fbfe4731c6448e0ce017a0ca8e6, type: 3}
   BombPrefab: {fileID: 1000012817701210, guid: 11653cd95a919dc4784ebc843cbfb6ee, type: 2}
   OilPrefab: {fileID: 1000014159875052, guid: 75d6aa0fae112dd4187b3bef7898490e, type: 2}
   MinePrefab: {fileID: 1000011274370760, guid: 332ddcd9458c8764aa1ea2c8eb19d7a4, type: 2}
