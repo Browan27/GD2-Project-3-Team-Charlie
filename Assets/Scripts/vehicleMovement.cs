@@ -85,8 +85,8 @@ public class vehicleMovement : MonoBehaviour {
             break;
         case 1:
             //Car
-            maxSpeed = 2.0f;
-            acceleration = 2.0f;
+            maxSpeed = 1.5f;
+            acceleration = 1.5f;
             rotationSpeed = 110f;
             hp = 3;
             defaultHP = hp;
@@ -144,7 +144,7 @@ public class vehicleMovement : MonoBehaviour {
         {
             slowTimer -= 1 * Time.deltaTime;
         }
-        if (slowTimer < 0 && boost == true)
+        if (slowTimer < 0 && slow == true)
         {
             slow = false;
             maxSpeed = tempSpeed;
@@ -217,7 +217,7 @@ public class vehicleMovement : MonoBehaviour {
         yRotation *= Time.deltaTime;
         zRotation *= Time.deltaTime;
 
-        gameObject.GetComponent<Rigidbody>().AddRelativeForce((translation / 2 * yRotation), 0, translation, ForceMode.Force);
+        gameObject.GetComponent<Rigidbody>().AddRelativeForce((translation / 2 * yRotation), 0, translation + (translation / 4), ForceMode.Force);
         transform.Rotate(xRotation, yRotation, zRotation);
         
         if(loser) {
@@ -385,8 +385,8 @@ public class vehicleMovement : MonoBehaviour {
         case "saw":
             GameObject s = Instantiate (SawPrefab);
             GameObject a = Instantiate (SawPrefab);
-            s.GetComponent<Saw> ().Initialize (gameObject, 2);
-            a.GetComponent<Saw> ().Initialize (gameObject, -2);
+            s.GetComponent<Saw> ().Initialize (gameObject, 3);
+            a.GetComponent<Saw> ().Initialize (gameObject, -3);
             break;
         case "shield":
             isShielded = true;
@@ -421,6 +421,7 @@ public class vehicleMovement : MonoBehaviour {
 		newAudio.playOnAwake = playAwake;
 		newAudio.volume = vol; 
         newAudio.priority = playerNumber;
+        newAudio.spatialBlend = 0.0f;
 		return newAudio;
 	}
 
