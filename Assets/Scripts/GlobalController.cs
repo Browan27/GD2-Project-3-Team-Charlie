@@ -13,7 +13,8 @@ public class GlobalController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        numPlayers = 4;
+        GameObject DC = GameObject.Find("DataController");
+        numPlayers = DC.GetComponent<DataController>().getPlayers();
         setPlayers();
         countdown = 0f;
     }

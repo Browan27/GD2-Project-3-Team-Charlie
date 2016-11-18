@@ -348,22 +348,22 @@ public class vehicleMovement : MonoBehaviour {
         case 1:
             GUI.DrawTexture (new Rect (0, 0, 128, 80), display);
             //GUI.Label(new Rect(0, 100, 200, 200), speed.ToString());
-            GUI.Label(new Rect(0, 110, 200, 200), hpTexture);
+            GUI.Label(new Rect(0, 80, 200, 200), hpTexture);
             break;
         case 2:
             GUI.DrawTexture (new Rect (Screen.width / 2, 0, 128, 80), display);
             //GUI.Label(new Rect(Screen.width / 2, 100, 200, 200), speed.ToString());
-            GUI.Label(new Rect(Screen.width / 2, 110, 200, 200), hpTexture);
+            GUI.Label(new Rect(Screen.width / 2, 80, 200, 200), hpTexture);
             break;
         case 3:
             GUI.DrawTexture (new Rect (0, Screen.height / 2 + 0, 128, 80), display);
             //GUI.Label(new Rect(0, Screen.height / 2 + 100, 200, 200), speed.ToString());
-            GUI.Label(new Rect(0, Screen.height / 2 + 110, 200, 200), hpTexture);
+            GUI.Label(new Rect(0, Screen.height / 2 + 80, 200, 200), hpTexture);
             break;
         case 4:
             GUI.DrawTexture (new Rect (Screen.width / 2, Screen.height / 2 + 0, 128, 80), display);
             //GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 100, 200, 200), speed.ToString());
-            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 110, 200, 200), hpTexture);
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 80, 200, 200), hpTexture);
             break;
         }
     }

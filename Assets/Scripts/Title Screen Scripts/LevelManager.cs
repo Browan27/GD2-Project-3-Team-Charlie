@@ -29,6 +29,11 @@ public class LevelManager : MonoBehaviour {
 	{
 		UnityEngine.SceneManagement.SceneManager.LoadScene("Arena");
 	}
+    
+    public void SetPlayers(int num) {
+        GameObject DC = GameObject.Find("DataController");
+        DC.GetComponent<DataController>().setPlayers(num);
+    }
 
 	public void QuitGame()
 	{
