@@ -43,7 +43,7 @@ GameObject:
   - 108: {fileID: 108000013531030128}
   - 122: {fileID: 122000014064913478}
   m_Layer: 0
-  m_Name: Player4
+  m_Name: Player
   m_TagString: Player4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
