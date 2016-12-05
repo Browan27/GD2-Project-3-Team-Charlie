@@ -44,7 +44,7 @@ GameObject:
   - 122: {fileID: 122000014064913478}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player4
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,8 +88,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012570648460}
-  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.000004, y: 2, z: 50.000004}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 10.000001, y: 2, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicleClass: 1
-  playerNumber: 4
+  playerNumber: 2
   loser: 0
   noItem: {fileID: 2800000, guid: 117b0ea2275759e40882ed5e58e003ad, type: 3}
   hpBar:
