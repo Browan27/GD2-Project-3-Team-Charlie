@@ -7,11 +7,12 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Windows
-  m_Shader: {fileID: 10706, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: UNITY_UI_ALPHACLIP _ALPHABLEND_ON _EMISSION
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: UNITY_UI_ALPHACLIP _ALPHAPREMULTIPLY_ON _EMISSION
   m_LightmapFlags: 1
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -90,16 +91,16 @@ Material:
       second: 1
     - first:
         name: _Glossiness
-      second: 0.5
+      second: 0.136
     - first:
         name: _GlossyReflections
       second: 1
     - first:
         name: _Metallic
-      second: 0
+      second: 0.059
     - first:
         name: _Mode
-      second: 2
+      second: 3
     - first:
         name: _OcclusionStrength
       second: 1
@@ -117,7 +118,7 @@ Material:
       second: 1
     - first:
         name: _SrcBlend
-      second: 5
+      second: 1
     - first:
         name: _Stencil
       second: 0
@@ -145,7 +146,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+      second: {r: 0.60840183, g: 0.6775817, b: 0.6838235, a: 0.4}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
