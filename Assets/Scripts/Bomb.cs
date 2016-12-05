@@ -6,6 +6,8 @@ public class Bomb : MonoBehaviour {
     GameObject player;
     int playerNumber;
 	public GameObject Explosion;
+    public AudioClip Boom;
+    private AudioSource BoomAS;
 
     public void Initialize(int p){
         playerNumber = p;

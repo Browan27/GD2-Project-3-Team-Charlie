@@ -49,9 +49,19 @@ public class vehicleMovement : MonoBehaviour {
     
     public AudioClip CarAccelerating;
     public AudioClip CarDriving;
+    public AudioClip ItemGet;
+    public AudioClip Saw;
+    public AudioClip Oil;
+    public AudioClip Shield;
+    public AudioClip Star;
     
-    private AudioSource acceleratingAS;
     private AudioSource drivingAS;
+    private AudioSource acceleratingAS;
+    private AudioSource ItemGetAS;
+    private AudioSource SawAS;
+    private AudioSource OilAS;
+    private AudioSource ShieldAS;
+    private AudioSource StarAS;
 
     // Use this for initialization
     void Start () {
@@ -72,6 +82,10 @@ public class vehicleMovement : MonoBehaviour {
         
         acceleratingAS = AddAudio(CarAccelerating, true, false, 0.6f);
 		drivingAS = AddAudio(CarDriving, true, false, 0.6f);
+        ItemGetAS = AddAudio(ItemGet, false, false, 0.5f);
+        OilAS = AddAudio(Oil, false, false, 0.5f);
+        ShieldAS = AddAudio(Shield, false, false, 0.5f);
+        StarAS = AddAudio(Star, false, false, 0.5f);
 
         translation = 0;
         speed = 0.0f;
@@ -117,11 +131,13 @@ public class vehicleMovement : MonoBehaviour {
     void Update () {
         if (invincTimer > 0) {
             invincTimer -= 1 * Time.deltaTime;
+            PlayStar();
         }
 
         if (invincTimer <= 0) {
             invincible = false;
             gameObject.GetComponent<Light> ().enabled = false;
+            StopStar();
         }
 
         if(boost == true)
@@ -267,6 +283,7 @@ public class vehicleMovement : MonoBehaviour {
             display = other.gameObject.GetComponent<ItemBoxRotator> ().pickups [pick];
             other.gameObject.SetActive (false);
             hasItem = true;
+            PlayItemGet();
         }
 
         if (other.gameObject.CompareTag ("Boost")) {
@@ -382,6 +399,7 @@ public class vehicleMovement : MonoBehaviour {
         case "oil":
             GameObject o = Instantiate (OilPrefab);
             o.GetComponent<Oil> ().Initialize (playerNumber);
+            PlayOil();
             break;
         case "mine":
             GameObject m = Instantiate (MinePrefab);
@@ -400,11 +418,13 @@ public class vehicleMovement : MonoBehaviour {
             GameObject a = Instantiate (SawPrefab);
             s.GetComponent<Saw> ().Initialize (gameObject, 3);
             a.GetComponent<Saw> ().Initialize (gameObject, -3);
+            PlaySaw();
             break;
         case "shield":
             isShielded = true;
             invincTimer = 5f;
             gameObject.GetComponent<Light> ().enabled = true;
+            PlayShield();
             break;
         case "invinc":
             invincible = true;
@@ -459,6 +479,66 @@ public class vehicleMovement : MonoBehaviour {
     private void StopDriving() {
 		if(drivingAS.isPlaying) {
 			drivingAS.Stop();
+		}
+	}
+    
+    private void PlayItemGet() {
+		if(!drivingAS.isPlaying) {
+			ItemGetAS.Play();
+		}
+	}
+    
+    private void StopItemGet() {
+		if(drivingAS.isPlaying) {
+			ItemGetAS.Stop();
+		}
+	}
+    
+    private void PlaySaw() {
+		if(!drivingAS.isPlaying) {
+			SawAS.Play();
+		}
+	}
+    
+    private void StopSaw() {
+		if(drivingAS.isPlaying) {
+			SawAS.Stop();
+		}
+	}
+    
+    private void PlayOil() {
+		if(!drivingAS.isPlaying) {
+			OilAS.Play();
+		}
+	}
+    
+    private void StopOil() {
+		if(drivingAS.isPlaying) {
+			OilAS.Stop();
+		}
+	}
+    
+    private void PlayShield() {
+		if(!drivingAS.isPlaying) {
+			ShieldAS.Play();
+		}
+	}
+    
+    private void StopShield() {
+		if(drivingAS.isPlaying) {
+			ShieldAS.Stop();
+		}
+	}
+    
+    private void PlayStar() {
+		if(!drivingAS.isPlaying) {
+			StarAS.Play();
+		}
+	}
+    
+    private void StopStar() {
+		if(drivingAS.isPlaying) {
+			StarAS.Stop();
 		}
 	}
 }

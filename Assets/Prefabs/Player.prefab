@@ -43,8 +43,8 @@ GameObject:
   - 108: {fileID: 108000013531030128}
   - 122: {fileID: 122000014064913478}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player2
+  m_Name: Player4
+  m_TagString: Player4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,8 +88,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012570648460}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 10.000001, y: 2, z: 50}
+  m_LocalRotation: {x: -0, y: -0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.000004, y: 2, z: 50.000004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicleClass: 1
-  playerNumber: 2
+  playerNumber: 4
   loser: 0
   noItem: {fileID: 2800000, guid: 117b0ea2275759e40882ed5e58e003ad, type: 3}
   hpBar:
@@ -316,6 +316,11 @@ MonoBehaviour:
   spawner: {fileID: 0}
   CarAccelerating: {fileID: 8300000, guid: 07d2bc91993680c4c8e1c24d3c38760d, type: 3}
   CarDriving: {fileID: 8300000, guid: 0407b1fc63e51de42a64e205dab5ebdf, type: 3}
+  ItemGet: {fileID: 8300000, guid: 342b514fd9080414a997c04cba9465ff, type: 3}
+  Saw: {fileID: 8300000, guid: 7f9500057472d824d93e32a860eba524, type: 3}
+  Oil: {fileID: 8300000, guid: 291370c42defbbe4083800fbb298b373, type: 3}
+  Shield: {fileID: 8300000, guid: 66ccbe401af7a8d42a4fccc12ab30266, type: 3}
+  Star: {fileID: 8300000, guid: 95ca34acf04636c4e8d0fda9117cc1ac, type: 3}
 --- !u!122 &122000014064913478
 Halo:
   m_ObjectHideFlags: 1
