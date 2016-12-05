@@ -7,7 +7,6 @@ public class ColorController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Renderer rend = GetComponent<Renderer>();
-        //rend.material.shader = Shader.Find("BaseColor");
-        rend.material.SetColor("BaseColor", colors[transform.parent.GetComponent<vehicleMovement>().playerNumber-1]);
+        rend.material.SetColor("_Color", colors[transform.parent.GetComponent<vehicleMovement>().playerNumber-1]);
 	}
 }

@@ -80,8 +80,8 @@ public class vehicleMovement : MonoBehaviour {
         standardDFriction = GetComponent<Collider> ().material.dynamicFriction;
         standardSFriction = GetComponent<Collider> ().material.staticFriction;
         
-        acceleratingAS = AddAudio(CarAccelerating, true, false, 0.6f);
-		drivingAS = AddAudio(CarDriving, true, false, 0.6f);
+        acceleratingAS = AddAudio(CarAccelerating, true, false, 0.5f);
+		drivingAS = AddAudio(CarDriving, true, false, 0.5f);
         ItemGetAS = AddAudio(ItemGet, false, false, 0.5f);
         OilAS = AddAudio(Oil, false, false, 0.5f);
         ShieldAS = AddAudio(Shield, false, false, 0.5f);
@@ -131,7 +131,6 @@ public class vehicleMovement : MonoBehaviour {
     void Update () {
         if (invincTimer > 0) {
             invincTimer -= 1 * Time.deltaTime;
-            PlayStar();
         }
 
         if (invincTimer <= 0) {
@@ -430,6 +429,7 @@ public class vehicleMovement : MonoBehaviour {
             invincible = true;
             invincTimer = 5f;
             gameObject.GetComponent<Light> ().enabled = true;
+            PlayStar();
             break;
         case "slow":
             for (int i = 0; i < GlobalController.numPlayers; i++) {
